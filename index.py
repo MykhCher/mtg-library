@@ -15,6 +15,17 @@ def total_manacosts(cardlist: list):
     for card in cardlist
   }
 
+def is_permanent(card: dict):
+  return "Sorcery" not in card.get("type", "") and "Instant" not in card.get("type", "")
+
+def card_color(card: dict):
+  manacost = card.get("manacost", {})
+  colors = []
+  for mana in manacost.keys():
+    if manacost.get(mana, 0) and mana != "colorless":
+      colors.append(mana)
+  return colors
+
+
 if __name__ == "__main__":
-  print(commander_list(cards))
-  print(total_manacosts(cards))
+  print({card.get("name", ""): card_color(card) for card in cards})
