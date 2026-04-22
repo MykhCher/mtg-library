@@ -21,8 +21,8 @@ def is_permanent(card: dict):
 def card_color(card: dict):
   manacost = card.get("manacost", {})
   colors = []
-  for mana in manacost.keys():
-    if manacost.get(mana, 0) and mana != "colorless":
+  for mana, amount in manacost.items():
+    if amount and mana != "colorless":
       colors.append(mana)
   return colors
 
